@@ -15,8 +15,6 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,16 +23,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             protected String doInBackground(Void... params) {
-
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("https://api.github.com/users/ashokslsk")
+                        .url("http://10.0.2.2:8080/api/chamada/9")
                         .build();
 
                 try {
                     Response response = client.newCall(request).execute();
                     String res = response.body().string();
-                    Log.v(TAG, "doInBackground() called with: " + "params = [" + res + "]");
+                    Log.d("Teste", "params = [" + res + "]");
+
                     return res;
                 } catch (IOException e) {
                     e.printStackTrace();
