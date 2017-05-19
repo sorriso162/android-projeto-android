@@ -9,11 +9,18 @@ import android.view.View;
 
 import java.io.IOException;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class MainActivity extends AppCompatActivity {
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,20 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             protected String doInBackground(Void... params) {
-                OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder()
-                        .url("http://10.0.2.2:8080/api/chamada/9")
-                        .build();
 
-                try {
-                    Response response = client.newCall(request).execute();
-                    String res = response.body().string();
-                    Log.d("Teste", "params = [" + res + "]");
 
-                    return res;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
+
+
 
                 return null;
             }

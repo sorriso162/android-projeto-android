@@ -4,11 +4,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.projeto.sqlite.Controller.BancoController;
+import com.projeto.sqlite.Db.LoginDados;
+
+import java.io.IOException;
 
 public class InsereDado extends AppCompatActivity {
 
@@ -22,6 +27,8 @@ public class InsereDado extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
     }
+
+
 
     public void insere(View view){
         String status = "aberto";
