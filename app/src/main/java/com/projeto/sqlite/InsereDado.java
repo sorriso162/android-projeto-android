@@ -1,7 +1,11 @@
 package com.projeto.sqlite;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -9,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.projeto.sqlite.Controller.BancoController;
+import com.projeto.sqlite.Network.CheckInternet;
 
 public class InsereDado extends AppCompatActivity {
 
@@ -24,6 +29,18 @@ public class InsereDado extends AppCompatActivity {
     }
 
     public void insere(View view){
+        boolean check = new CheckInternet().isConnected(this);
+        if(check == true){
+            Toast.makeText(this, "Tem Internet", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Não tem Internet", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+    /*
+        public void insere(View view){
         String status = "aberto";
         BancoController crud = new BancoController(getBaseContext());
         Spinner titulo = (Spinner)findViewById(R.id.spinner1);
@@ -36,4 +53,5 @@ public class InsereDado extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
     }
+     */
 }
