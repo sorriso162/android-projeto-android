@@ -58,6 +58,10 @@ public class Login extends Activity  {
         senha = (EditText)findViewById(R.id.password);
     }
 
+    /*
+        Acao ao clicar, se houxer conexao ele faz a requisicao
+        se nao ele manda uma msg que nao tem internet
+     */
     public void VerificaLogin(View view) throws IOException {
         CheckInternet check = new CheckInternet();
 
@@ -77,7 +81,7 @@ public class Login extends Activity  {
                         }else{
                             Login.this.runOnUiThread(new Runnable() {
                                 public void run() {
-                                    Toast.makeText(Login.this, "Login Incorreto!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, "Login Incorreto!", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -92,6 +96,18 @@ public class Login extends Activity  {
         }
     }
 
+    /*
+        Convertendo o objeto em JSON
+     */
+    public String converteParaJson(LoginDados ld) {
+        Gson gson = new Gson();
+        String json = gson.toJson(ld);
+        return json;
+    }
+
+    /*
+        Metodo esta recebendo o objeto e transformando em json
+     */
     public Boolean loginUser(LoginDados ld) throws IOException {
         String url       = "http://10.0.2.2:8080/SistemaChamado/rest/chamados/user";
         PostMethod ma    = new PostMethod();
@@ -107,9 +123,4 @@ public class Login extends Activity  {
         return false;
     }
 
-    public String converteParaJson(LoginDados ld) {
-        Gson gson = new Gson();
-        String json = gson.toJson(ld);
-        return json;
-    }
 }

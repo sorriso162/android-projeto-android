@@ -16,24 +16,17 @@ import okhttp3.Response;
 
 public class PostMethod {
     public static final  MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    OkHttpClient client = new OkHttpClient();
 
     String post(String url, String json) throws IOException
     {
-        OkHttpClient client = new OkHttpClient();
-
-        Request.Builder builder = new Request.Builder();
-        builder .url(url);
-
-
-
-        RequestBody body = RequestBody.create(JSON , json);
-        builder.post(body);
-
-        Request request = builder.build();
-
+        RequestBody body = RequestBody.create(JSON, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
         Response response = client.newCall(request).execute();
 
-        String resposta  = response.body().string();
-        return resposta;
+        return response.body().string();
     }
 }
