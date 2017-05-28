@@ -1,4 +1,4 @@
-package com.projeto.sqlite;
+package com.projeto.sqlite.Request;
 
 import android.util.Log;
 
@@ -14,11 +14,11 @@ import okhttp3.Response;
  * Created by Bruni on 18/05/2017.
  */
 
-public class PostMethod {
+public class MethodRequest {
     public static final  MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     OkHttpClient client = new OkHttpClient();
 
-    String post(String url, String json) throws IOException
+    public String post(String url, String json) throws IOException
     {
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()

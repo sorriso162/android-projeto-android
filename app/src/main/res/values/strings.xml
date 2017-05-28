@@ -4,6 +4,16 @@
     <string name="button_consultar">Consultar</string>
     <string name="title_activity_login">Login</string>
 
+    <string-array name="type_array">
+        <item>Analista de Sistemas</item>
+        <item>Analista de Testes</item>
+        <item>DBA</item>
+        <item>Infraestrutura</item>
+        <item>Programador</item>
+        <item>Redes</item>
+        <item>Suporte Técnico</item>
+    </string-array>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

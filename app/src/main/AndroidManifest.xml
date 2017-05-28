@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".InsereDado" />
+        <activity android:name=".InsereChamadoActivity" />
         <activity android:name=".Consulta" />
         <activity android:name=".Alterar" />
         <activity android:name=".Inicial" />

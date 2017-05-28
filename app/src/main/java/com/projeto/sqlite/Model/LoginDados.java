@@ -1,4 +1,4 @@
-package com.projeto.sqlite.Db;
+package com.projeto.sqlite.Model;
 
 /**
  * Created by Bruni on 18/05/2017.
