@@ -7,8 +7,12 @@ import com.google.gson.Gson;
  */
 
 public class ConvertGson {
+    Gson gson = new Gson();
+
+    /*
+        Convertendo o objeto em JSON
+     */
     public String converteParaJson(Object ld) {
-        Gson gson = new Gson();
         String json = gson.toJson(ld);
         return json;
     }
