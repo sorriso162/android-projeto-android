@@ -1,10 +1,12 @@
 package com.projeto.sqlite;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.projeto.sqlite.Model.ChamadoDados;
@@ -30,7 +32,8 @@ public class ConsultaChamadoActivity extends AppCompatActivity {
 
         // consulta chamado layout
         listView = (ListView) findViewById(R.id.listview);
-
+        View view = null;
+        pegaId(view);
         try {
             findAll();
         } catch (IOException e) {
@@ -55,6 +58,7 @@ public class ConsultaChamadoActivity extends AppCompatActivity {
 
                     ca =  new CustomAdapter(ConsultaChamadoActivity.this, 0, people);
                     listView.setAdapter(ca);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
@@ -63,5 +67,28 @@ public class ConsultaChamadoActivity extends AppCompatActivity {
             }
         }).start();
 
+    }
+
+
+    public void pegaId(View view)
+    {
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapter, View view,
+                                    int posicao, long id) {
+                // TODO Auto-generated method stub
+                Object a = listView.getItemAtPosition(posicao);
+                ChamadoDados da = new ChamadoDados();
+                da = (ChamadoDados) a;
+                Log.i("id desse lista",""+a);
+
+
+                listView = (ListView) findViewById(R.id.listview);
+                Intent intent = new Intent(ConsultaChamadoActivity.this, Alterar.class);
+                intent.putExtra("codigo", ""+da.getId());
+                startActivity(intent);
+
+            }
+        });
     }
 }
