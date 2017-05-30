@@ -1,9 +1,4 @@
 package com.projeto.sqlite;
-
-/**
- * Created by Andre on 29/05/2017.
- */
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -39,8 +34,8 @@ public class CustomAdapter extends ArrayAdapter<ChamadoDados> {
         TextView txtName = (TextView) converView.findViewById(R.id.txt_label);
         TextView txtId = (TextView) converView.findViewById(R.id.txt_label_id);
 
-        txtName.setText(p.getUsuario());
-        txtId.setText(p.getId());
+        txtName.setText(p.getDescricao());
+        txtId.setText(String.valueOf(p.getId()));
 
         return converView;
     }

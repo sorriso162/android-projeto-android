@@ -16,20 +16,11 @@ public class ChamadoDados {
     private String status;
     private String tipo;
 
-
-
     public ChamadoDados(){}
 
-    public ChamadoDados(int id, String usuario, String descricao, String status, String tipo,
-                        String solucionador, String dataInicio, String dataFim) {
-        this.id = id;
-        this.usuario = usuario;
+    public ChamadoDados(int id, String descricao) {
+        this.id = id ;
         this.descricao = descricao;
-        this.status = status;
-        this.tipo = tipo ;
-        this.solucionador = solucionador;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
     }
 
     public Integer getIdUsuario() {

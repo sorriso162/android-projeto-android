@@ -49,14 +49,10 @@ public class ConsultaChamadoActivity extends AppCompatActivity {
 
                     for (int i = 0; i < obj.length(); i++) {
                         JSONObject data = obj.getJSONObject(i);
-
-                        people.add(new ChamadoDados(data.getInt("id"), data.getString("usuario"),
-                                data.getString("descricao"), data.getString("status"),
-                                data.getString("tipo"), data.getString("solucionador"),
-                                data.getString("dateInicio"), data.getString("dataFim")));
+                        people.add(new ChamadoDados(data.getInt("id"), data.getString("descricao")));
                     }
 
-                    ca =  new CustomAdapter(this, 0, people);
+                    ca =  new CustomAdapter(ConsultaChamadoActivity.this, 0, people);
                     listView.setAdapter(ca);
                 } catch (IOException e) {
                     e.printStackTrace();
