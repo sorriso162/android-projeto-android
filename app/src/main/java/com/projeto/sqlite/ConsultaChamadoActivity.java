@@ -3,6 +3,8 @@ package com.projeto.sqlite;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.projeto.sqlite.Model.ChamadoDados;
@@ -35,7 +37,6 @@ public class ConsultaChamadoActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     public void findAll() throws IOException {
 
         new Thread(new Runnable() {
