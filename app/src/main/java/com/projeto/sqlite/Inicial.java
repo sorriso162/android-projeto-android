@@ -21,7 +21,7 @@ public class Inicial extends AppCompatActivity {
     }
 
     public void SelectUpdate(View view){
-        Intent it = new Intent(Inicial.this, Consulta.class);
+        Intent it = new Intent(Inicial.this, ConsultaChamadoActivity.class);
         startActivity(it);
     }
 

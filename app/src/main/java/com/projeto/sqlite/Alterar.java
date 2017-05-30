@@ -48,7 +48,7 @@ public class Alterar extends Activity {
     public void updateCall(View view){
         crud.alteraRegistro(Integer.parseInt(codigo), livro.getText().toString(),autor.getText().toString(),
                 editora.getText().toString());
-        Intent intent = new Intent(Alterar.this,Consulta.class);
+        Intent intent = new Intent(Alterar.this,ConsultaChamadoActivity.class);
         startActivity(intent);
         finish();
 
@@ -56,7 +56,7 @@ public class Alterar extends Activity {
 
     public void deleteCall(View view){
         crud.deletaRegistro(Integer.parseInt(codigo));
-        Intent intent = new Intent(Alterar.this,Consulta.class);
+        Intent intent = new Intent(Alterar.this,ConsultaChamadoActivity.class);
         startActivity(intent);
         finish();
     }
