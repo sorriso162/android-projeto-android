@@ -6,11 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.projeto.sqlite.Model.ChamadoDados;
-import com.projeto.sqlite.Request.MethodRequest;
+import com.projeto.sqlite.Network.MethodRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;

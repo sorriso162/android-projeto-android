@@ -9,9 +9,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.projeto.sqlite.Model.ChamadoDados;
-import com.projeto.sqlite.Model.ConvertGson;
+import com.projeto.sqlite.Network.ConvertGson;
 import com.projeto.sqlite.Network.CheckInternet;
-import com.projeto.sqlite.Request.MethodRequest;
+import com.projeto.sqlite.Network.MethodRequest;
 
 import java.io.IOException;
 

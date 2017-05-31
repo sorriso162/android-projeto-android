@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.projeto.sqlite.Model.LoginDados;
 import com.projeto.sqlite.Network.CheckInternet;
-import com.projeto.sqlite.Request.MethodRequest;
+import com.projeto.sqlite.Network.MethodRequest;
 
 import java.io.IOException;
 

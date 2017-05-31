@@ -1,4 +1,4 @@
-package com.projeto.sqlite.Model;
+package com.projeto.sqlite.Network;
 
 import com.google.gson.Gson;
 
