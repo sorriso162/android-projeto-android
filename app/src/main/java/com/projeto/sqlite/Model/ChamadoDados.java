@@ -23,6 +23,12 @@ public class ChamadoDados {
         this.descricao = descricao;
     }
 
+    public ChamadoDados(String descricao, String tipo, String status){
+        this.descricao = descricao;
+        this.tipo = tipo;
+        this.status = status;
+    }
+
     public Integer getIdUsuario() {
         return idUsuario;
     }

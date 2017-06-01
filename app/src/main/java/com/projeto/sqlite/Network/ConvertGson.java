@@ -12,8 +12,13 @@ public class ConvertGson {
     /*
         Convertendo o objeto em JSON
      */
-    public String converteParaJson(Object ld) {
-        String json = gson.toJson(ld);
+    public String converteParaJson(Object classe) {
+        String json = gson.toJson(classe);
         return json;
+    }
+
+    // transforma json em objeto
+    public Object paraObjeto(String resultado, Class classe){
+        return gson.fromJson(resultado, classe);
     }
 }

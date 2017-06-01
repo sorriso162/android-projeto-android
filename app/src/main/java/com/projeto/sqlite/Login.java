@@ -3,7 +3,9 @@ package com.projeto.sqlite;
 import android.app.Activity;
 import android.content.Intent;
 
+import android.icu.text.LocaleDisplayNames;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.projeto.sqlite.Model.LoginDados;
 import com.projeto.sqlite.Network.CheckInternet;
+import com.projeto.sqlite.Network.ConvertGson;
 import com.projeto.sqlite.Network.MethodRequest;
 
 import java.io.IOException;
@@ -67,24 +70,14 @@ public class Login extends Activity  {
     }
 
     /*
-        Convertendo o objeto em JSON
-     */
-    public String converteParaJson(LoginDados ld) {
-        Gson gson = new Gson();
-        String json = gson.toJson(ld);
-        return json;
-    }
-
-    /*
         Metodo esta recebendo o objeto e transformando em json
      */
     public Boolean loginUser(LoginDados ld) throws IOException {
-        String url       = "http://10.0.2.2:8080/SistemaChamado/rest/user";
         MethodRequest ma    = new MethodRequest();
-        String resultado = ma.post(url, converteParaJson(ld));
-        Gson gson = new Gson();
-        // transforma json em objeto
-        ld = gson.fromJson(resultado, LoginDados.class);
+        ConvertGson convert = new ConvertGson();
+        String url          = "http://10.0.2.2:8080/SistemaChamado/rest/user";
+        String resultado = ma.post(url, convert.converteParaJson(ld));
+        ld = (LoginDados) convert.paraObjeto(resultado, LoginDados.class);
 
         if(ld != null){
             return true;
