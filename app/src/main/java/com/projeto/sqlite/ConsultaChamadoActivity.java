@@ -79,8 +79,6 @@ public class ConsultaChamadoActivity extends AppCompatActivity {
                 Object a = listView.getItemAtPosition(posicao);
                 ChamadoDados da = new ChamadoDados();
                 da = (ChamadoDados) a;
-                Log.i("id desse lista",""+a);
-
 
                 listView = (ListView) findViewById(R.id.listview);
                 Intent intent = new Intent(ConsultaChamadoActivity.this, Alterar.class);

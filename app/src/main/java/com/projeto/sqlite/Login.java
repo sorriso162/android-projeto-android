@@ -17,6 +17,9 @@ import com.projeto.sqlite.Network.CheckInternet;
 import com.projeto.sqlite.Network.ConvertGson;
 import com.projeto.sqlite.Network.MethodRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.IOException;
 
 
@@ -78,7 +81,6 @@ public class Login extends Activity  {
         String url          = "http://10.0.2.2:8080/SistemaChamado/rest/user";
         String resultado = ma.post(url, convert.converteParaJson(ld));
         ld = (LoginDados) convert.paraObjeto(resultado, LoginDados.class);
-
         if(ld != null){
             return true;
         }
