@@ -30,7 +30,7 @@ public class Login extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        cpf = (EditText)findViewById(R.id.email);
+        cpf = (EditText)findViewById(R.id.cpf);
         senha = (EditText)findViewById(R.id.password);
     }
 

@@ -6,15 +6,14 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.projeto.sqlite.Controller.BancoController;
 import com.projeto.sqlite.Db.CallEntry;
-import com.projeto.sqlite.Model.ChamadoDados;
-import com.projeto.sqlite.Network.CheckInternet;
-import com.projeto.sqlite.Network.ConvertGson;
 import com.projeto.sqlite.Network.MethodRequest;
 
 import org.json.JSONArray;
@@ -22,123 +21,98 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by Andre on 22/04/2017.
  */
 public class Alterar extends Activity {
-
-    String codigo = this.getIntent().getStringExtra("codigo");
-    EditText id = (EditText)findViewById(R.id.editText4);
+    String codigo;
+    TextView id;
+    TextView tipo;
     EditText descricao;
-    EditText tipo;
+    EditText status;
+    TextView nome_usuario;
+    TextView nome_solucionador;
+    TextView data_inicio;
+    TextView data_fim;
 
-    CheckInternet check = new CheckInternet();
-    private ArrayList<ChamadoDados> chamados = new ArrayList<ChamadoDados>();
+    JSONObject data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alterar);
 
-        if(check.isConnected(this)){
-            try {
-                id.setText(codigo);
-                selectById();
+        codigo = this.getIntent().getStringExtra("codigo");
 
-                Intent intent = new Intent(Alterar.this, ConsultaChamadoActivity.class);
-                startActivity(intent);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }else{
-            Toast.makeText(this, "Você não tem Internet", Toast.LENGTH_SHORT).show();
+        try {
+            selectById(codigo);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public void updateCall(View view){
-
-
-        if(check.isConnected(this)){
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    ChamadoDados cd = new ChamadoDados();
-                    descricao = (EditText)findViewById(R.id.editText5);
-                    tipo = (EditText)findViewById(R.id.editText6);
-
-                    try {
-                        // se existir ele acessa o sistema
-                        if(updateById(cd)) {
-                            Alterar.this.runOnUiThread(new Runnable() {
-                                public void run() {
-                                    Toast.makeText(Alterar.this, "Alterado!", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            Intent it = new Intent(Alterar.this, Inicial.class);
-                            startActivity(it);
-                        }else{
-                            Alterar.this.runOnUiThread(new Runnable() {
-                                public void run() {
-                                    Toast.makeText(Alterar.this, "Ocorreu Algum Erro!", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    } catch (IOException e) {
-                        // Imprime o erro
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-        }else{
-            Toast.makeText(this, "Você não tem Internet", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    public void deleteCall(View view){
-    }
-
-    public boolean updateById(ChamadoDados cd) throws IOException{
-        MethodRequest ma    = new MethodRequest();
-        ConvertGson convert = new ConvertGson();
-        String url          = "url para alterar por id, tem que ser post com parametro na url ?id="+codigo;
-        String resultado = ma.post(url, convert.converteParaJson(cd));
-        cd = (ChamadoDados) convert.paraObjeto(resultado, ChamadoDados.class);
-
-        if(cd != null){
-            return true;
-        }
-
-        return false;
-    }
-
-    public void selectById() throws JSONException, IOException {
+    public void selectById(final String codigo) throws IOException{
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try{
-                    String url = "seleciona o chamado pelo id, tem que ser get ?id="+codigo;
-                    MethodRequest method = new MethodRequest();
-                    String resultado = method.get(url);
+                String url = "http://10.0.2.2:8080/SistemaChamado/rest/lista/"+codigo;
+                MethodRequest method = new MethodRequest();
+                String resultado = null;
+                try {
+
+                    resultado = method.get(url);
                     JSONArray obj = new JSONArray(resultado);
+
                     for (int i = 0; i < obj.length(); i++) {
-                        JSONObject data = obj.getJSONObject(i);
-                        chamados.add(new ChamadoDados(data.getString("descricao"), data.getString("tipo"), data.getString("status")));
+                        data = obj.getJSONObject(i);
                     }
-                    // Sorriso, colocar os valores aqui dentro
-                    //descricao.setText();
-                    //tipo.setText();
-                    //status.setText();
-                }catch (IOException e){
-                    e.getMessage();
+
+                    String solucionador = "";
+                    if(data.getString("nomeSolucionador") == "null"){
+                        solucionador = "Não há Solucionador";
+                    }
+
+                    String dataFim = "";
+                    if(data.getString("dataFim") == "null"){
+                        dataFim = "Não foi fechado ainda!";
+                    }
+                    
+                    // Pegando os Elementos
+                    id = (TextView)findViewById(R.id.id);
+                    tipo = (TextView) findViewById(R.id.tipo);
+                    data_inicio = (TextView) findViewById(R.id.data_inicio);
+                    data_fim = (TextView) findViewById(R.id.data_fim);
+                    descricao = (EditText) findViewById(R.id.descricao);
+                    status = (EditText) findViewById(R.id.status);
+                    nome_usuario = (TextView) findViewById(R.id.nome_usuario);
+                    nome_solucionador = (TextView) findViewById(R.id.nome_solucionador);
+
+                    // Colocando o valor nos Elementos
+                    id.setText(codigo);
+                    tipo.setText(data.getString("tipo"));
+                    data_inicio.setText(data.getString("dateInicio"));
+                    data_fim.setText(dataFim);
+                    descricao.setText(data.getString("descricao"));
+                    status.setText(data.getString("status"));
+                    nome_usuario.setText(data.getString("nomeUsuario"));
+                    nome_solucionador.setText(solucionador);
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         }).start();
     }
+
+    public void updateCall(View view){
+        Intent intent = new Intent(Alterar.this,ConsultaChamadoActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }
