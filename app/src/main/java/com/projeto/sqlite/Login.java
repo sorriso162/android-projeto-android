@@ -21,13 +21,13 @@ import java.io.IOException;
 
 
 public class Login extends Activity  {
-    AutoCompleteTextView cpf;
+    EditText cpf;
     EditText senha;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        cpf = (AutoCompleteTextView)findViewById(R.id.email);
+        cpf = (EditText)findViewById(R.id.email);
         senha = (EditText)findViewById(R.id.password);
     }
 

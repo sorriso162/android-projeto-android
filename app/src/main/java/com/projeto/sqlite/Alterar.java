@@ -130,8 +130,8 @@ public class Alterar extends Activity {
                         chamados.add(new ChamadoDados(data.getString("descricao"), data.getString("tipo"), data.getString("status")));
                     }
                     // Sorriso, colocar os valores aqui dentro
-                    descricao.setText();
-                    tipo.setText();
+                    //descricao.setText();
+                    //tipo.setText();
                     //status.setText();
                 }catch (IOException e){
                     e.getMessage();

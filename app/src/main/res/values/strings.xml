@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sistema de Chamados</string>
+    <string name="app_name">Chamados</string>
     <string name="button_inserir">Inserir</string>
     <string name="button_consultar">Consultar</string>
     <string name="title_activity_login">Login</string>
@@ -15,9 +15,9 @@
     </string-array>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="prompt_cpf">CPF</string>
+    <string name="prompt_senha">Senha</string>
+    <string name="action_entrar">Entrar</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
