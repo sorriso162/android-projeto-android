@@ -1,6 +1,7 @@
 package com.projeto.sqlite;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,9 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.projeto.sqlite.Controller.BancoController;
 import com.projeto.sqlite.Db.CallEntry;
+import com.projeto.sqlite.Model.ChamadoDados;
+import com.projeto.sqlite.Network.ConvertGson;
 import com.projeto.sqlite.Network.MethodRequest;
 
 import org.json.JSONArray;
@@ -110,9 +114,55 @@ public class Alterar extends Activity {
     }
 
     public void updateCall(View view){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                id = (TextView)findViewById(R.id.id);
+                String idText = id.getText().toString();
+                status = (EditText) findViewById(R.id.status);
+                String statusText = status.getText().toString();
+                descricao = (EditText) findViewById(R.id.descricao);
+                String descricaoText = descricao.getText().toString();
+
+                ChamadoDados cd = new ChamadoDados();
+                cd.setId(Integer.parseInt(idText));
+                cd.setDescricao(descricaoText);
+                //cd.setStatus(statusText);
+                //cd.setIdSolucionador(1);
+
+                try{
+                    if(atualizarChamado(cd)){
+                        Alterar.this.runOnUiThread(new Runnable(){
+                            public void run(){
+                                Toast.makeText(Alterar.this, "Chamado Alterado!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }catch (IOException e){
+                    Alterar.this.runOnUiThread(new Runnable(){
+                        public void run(){
+                            Toast.makeText(Alterar.this, "Ocorreu um Erro!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        }).start();
+
         Intent intent = new Intent(Alterar.this,ConsultaChamadoActivity.class);
         startActivity(intent);
         finish();
     }
 
+    public Boolean atualizarChamado(ChamadoDados cd) throws IOException{
+        ConvertGson convert = new ConvertGson();
+        String url       = "http://10.0.2.2:8080/SistemaChamado/rest/update";
+        MethodRequest ma = new MethodRequest();
+        String resultado = ma.post(url, convert.converteParaJson(cd));
+
+        if(resultado != null){
+            return true;
+        }
+
+        return false;
+    }
 }
