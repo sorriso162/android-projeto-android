@@ -19,6 +19,7 @@ import com.projeto.sqlite.Network.MethodRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -64,6 +65,8 @@ public class Login extends Activity  {
                     } catch (IOException e) {
                         // Imprime o erro
                         e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 }
             }).start();
@@ -75,12 +78,19 @@ public class Login extends Activity  {
     /*
         Metodo esta recebendo o objeto e transformando em json
      */
-    public Boolean loginUser(LoginDados ld) throws IOException {
+    public Boolean loginUser(LoginDados ld) throws IOException, JSONException {
         MethodRequest ma    = new MethodRequest();
         ConvertGson convert = new ConvertGson();
         String url          = "http://10.0.2.2:8080/SistemaChamado/rest/user";
         String resultado = ma.post(url, convert.converteParaJson(ld));
         ld = (LoginDados) convert.paraObjeto(resultado, LoginDados.class);
+        JSONArray obj = new JSONArray(resultado);
+
+        for (int i = 0; i < obj.length(); i++) {
+            JSONObject data = obj.getJSONObject(i);
+            Log.i("dfdsf", String.valueOf(data.getInt("id")));
+        }
+        Log.i("dwfdf", convert.converteParaJson(ld));
         if(ld != null){
             return true;
         }

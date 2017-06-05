@@ -2,6 +2,7 @@ package com.projeto.sqlite;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -44,7 +45,7 @@ public class InsereChamadoActivity extends AppCompatActivity {
                     String text = dropdown.getSelectedItem().toString();
 
                     ChamadoDados cd = new ChamadoDados();
-                    cd.setIdUsuario(1);
+                    //cd.setIdUsuario(1);
                     cd.setTipo(text);
                     cd.setDescricao(message);
 
@@ -76,6 +77,8 @@ public class InsereChamadoActivity extends AppCompatActivity {
         String url       = "http://10.0.2.2:8080/SistemaChamado/rest/criar";
         MethodRequest ma = new MethodRequest();
         String resultado = ma.post(url, convert.converteParaJson(cd));
+
+        Log.i("sfsdf", convert.converteParaJson(cd));
 
         if(resultado != null){
             return true;

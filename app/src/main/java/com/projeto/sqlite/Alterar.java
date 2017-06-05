@@ -127,7 +127,7 @@ public class Alterar extends Activity {
                 ChamadoDados cd = new ChamadoDados();
                 cd.setId(Integer.parseInt(idText));
                 cd.setDescricao(descricaoText);
-                //cd.setStatus(statusText);
+                cd.setStatus(statusText);
                 //cd.setIdSolucionador(1);
 
                 try{
