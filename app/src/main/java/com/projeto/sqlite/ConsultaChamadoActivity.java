@@ -84,7 +84,7 @@ public class ConsultaChamadoActivity extends AppCompatActivity {
                 Intent intent = new Intent(ConsultaChamadoActivity.this, Alterar.class);
                 intent.putExtra("codigo", ""+da.getId());
                 startActivity(intent);
-
+                finish();
             }
         });
     }

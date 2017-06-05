@@ -134,23 +134,22 @@ public class Alterar extends Activity {
                     if(atualizarChamado(cd)){
                         Alterar.this.runOnUiThread(new Runnable(){
                             public void run(){
-                                Toast.makeText(Alterar.this, "Chamado Alterado!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Alterar.this, "Chamado Alterado!", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 }catch (IOException e){
                     Alterar.this.runOnUiThread(new Runnable(){
                         public void run(){
-                            Toast.makeText(Alterar.this, "Ocorreu um Erro!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Alterar.this, "Ocorreu um Erro!", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
+                Intent intent = new Intent(Alterar.this,ConsultaChamadoActivity.class);
+                startActivity(intent);
+                finish();
             }
         }).start();
-
-        Intent intent = new Intent(Alterar.this,ConsultaChamadoActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     public Boolean atualizarChamado(ChamadoDados cd) throws IOException{
