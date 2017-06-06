@@ -7,11 +7,11 @@ package com.projeto.sqlite.Model;
 public class ChamadoDados {
     private int id;
     private String usuario;
-    private Integer idUsuario;
+    private String idUsuario;
     private String dataInicio;
     private String dataFim;
     private String descricao;
-    private Integer idSolucionador;
+    private String idSolucionador;
     private String solucionador;
     private String status;
     private String tipo;
@@ -29,11 +29,11 @@ public class ChamadoDados {
         this.status = status;
     }
 
-    public Integer getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -69,11 +69,11 @@ public class ChamadoDados {
         this.descricao = descricao;
     }
 
-    public Integer getIdSolucionador() {
+    public String getIdSolucionador() {
         return idSolucionador;
     }
 
-    public void setIdSolucionador(Integer idSolucionador) {
+    public void setIdSolucionador(String idSolucionador) {
         this.idSolucionador = idSolucionador;
     }
     public int getId() {

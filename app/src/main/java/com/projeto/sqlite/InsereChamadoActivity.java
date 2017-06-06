@@ -45,7 +45,7 @@ public class InsereChamadoActivity extends AppCompatActivity {
                     String text = dropdown.getSelectedItem().toString();
 
                     ChamadoDados cd = new ChamadoDados();
-                    //cd.setIdUsuario(1);
+                    cd.setIdUsuario("1");
                     cd.setTipo(text);
                     cd.setDescricao(message);
 

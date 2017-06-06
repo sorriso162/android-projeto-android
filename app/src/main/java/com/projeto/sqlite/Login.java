@@ -84,13 +84,7 @@ public class Login extends Activity  {
         String url          = "http://10.0.2.2:8080/SistemaChamado/rest/user";
         String resultado = ma.post(url, convert.converteParaJson(ld));
         ld = (LoginDados) convert.paraObjeto(resultado, LoginDados.class);
-        JSONArray obj = new JSONArray(resultado);
 
-        for (int i = 0; i < obj.length(); i++) {
-            JSONObject data = obj.getJSONObject(i);
-            Log.i("dfdsf", String.valueOf(data.getInt("id")));
-        }
-        Log.i("dwfdf", convert.converteParaJson(ld));
         if(ld != null){
             return true;
         }
