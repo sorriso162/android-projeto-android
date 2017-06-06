@@ -6,13 +6,13 @@ package com.projeto.sqlite.Model;
 
 public class ChamadoDados {
     private int id;
-    private String usuario;
+    private String nomeUsuario;
     private String idUsuario;
-    private String dataInicio;
+    private String dateInicio;
     private String dataFim;
     private String descricao;
     private String idSolucionador;
-    private String solucionador;
+    private String nomeSolucionador;
     private String status;
     private String tipo;
 
@@ -27,6 +27,14 @@ public class ChamadoDados {
         this.descricao = descricao;
         this.tipo = tipo;
         this.status = status;
+    }
+
+    public String getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(String dataFim) {
+        this.dataFim = dataFim;
     }
 
     public String getIdUsuario() {
@@ -54,11 +62,11 @@ public class ChamadoDados {
     }
 
     public String getDataInicio() {
-        return dataInicio;
+        return dateInicio;
     }
 
     public void setDataInicio(String dataInicio) {
-        this.dataInicio = dataInicio;
+        this.dateInicio = dataInicio;
     }
 
     public String getDescricao() {
@@ -85,32 +93,32 @@ public class ChamadoDados {
     }
 
     public String getUsuario() {
-        return usuario;
+        return nomeUsuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
     }
 
     public String getSolucionador() {
-        return solucionador;
+        return nomeSolucionador;
     }
 
-    public void setSolucionador(String solucionador) {
-        solucionador = solucionador;
+    public void setSolucionador(String nomeSolucionador) {
+        nomeSolucionador = nomeSolucionador;
     }
 
     @Override
     public String toString() {
         return "ChamadoDados{" +
                 "id=" + id +
-                ", usuario='" + usuario + '\'' +
+                ", usuario='" + nomeUsuario + '\'' +
                 ", idUsuario=" + idUsuario +
-                ", dataInicio='" + dataInicio + '\'' +
+                ", dataInicio='" + dateInicio + '\'' +
                 ", dataFim='" + dataFim + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", idSolucionador=" + idSolucionador +
-                ", solucionador='" + solucionador + '\'' +
+                ", solucionador='" + nomeSolucionador + '\'' +
                 ", status='" + status + '\'' +
                 ", tipo='" + tipo + '\'' +
                 '}';

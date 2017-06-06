@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.projeto.sqlite.Controller.BancoController;
 import com.projeto.sqlite.Db.CallEntry;
 import com.projeto.sqlite.Model.ChamadoDados;
@@ -60,28 +62,32 @@ public class Alterar extends Activity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://10.0.2.2:8080/SistemaChamado/rest/lista/"+codigo;
+                String url = "http://10.0.2.2:8080/SistemaChamado/rest/um/"+codigo;
                 MethodRequest method = new MethodRequest();
                 String resultado = null;
                 try {
 
                     resultado = method.get(url);
-                    JSONArray obj = new JSONArray(resultado);
+                   Gson gson = new Gson();
 
-                    for (int i = 0; i < obj.length(); i++) {
-                        data = obj.getJSONObject(i);
-                    }
+
+                    ChamadoDados cd = gson.fromJson(resultado, ChamadoDados.class);
+                    Log.i("chamado dados corpo", cd.toString());
 
                     String solucionador = "";
-                    if(data.getString("nomeSolucionador") == "null"){
+                    if(cd.getSolucionador() == null){
                         solucionador = "Não há Solucionador";
+                    }else{
+                        cd.getSolucionador();
                     }
 
                     String dataFim = "";
-                    if(data.getString("dataFim") == "null"){
+                    if(cd.getDataFim() == null){
                         dataFim = "Não foi fechado ainda!";
+                    }else{
+                        dataFim = cd.getDataFim();
                     }
-                    
+
                     // Pegando os Elementos
                     id = (TextView)findViewById(R.id.id);
                     tipo = (TextView) findViewById(R.id.tipo);
@@ -94,18 +100,16 @@ public class Alterar extends Activity {
 
                     // Colocando o valor nos Elementos
                     id.setText(codigo);
-                    tipo.setText(data.getString("tipo"));
-                    data_inicio.setText(data.getString("dateInicio"));
+                    tipo.setText(cd.getTipo());
+                    data_inicio.setText(cd.getDataInicio());
                     data_fim.setText(dataFim);
-                    descricao.setText(data.getString("descricao"));
-                    status.setText(data.getString("status"));
-                    nome_usuario.setText(data.getString("nomeUsuario"));
+                    descricao.setText(cd.getDescricao());
+                    status.setText(cd.getStatus());
+                    nome_usuario.setText(cd.getUsuario());
                     nome_solucionador.setText(solucionador);
 
 
                 } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
@@ -134,14 +138,14 @@ public class Alterar extends Activity {
                     if(atualizarChamado(cd)){
                         Alterar.this.runOnUiThread(new Runnable(){
                             public void run(){
-                            Toast.makeText(Alterar.this, "Chamado Alterado!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Alterar.this, "Chamado Alterado!", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 }catch (IOException e){
                     Alterar.this.runOnUiThread(new Runnable(){
                         public void run(){
-                        Toast.makeText(Alterar.this, "Ocorreu um Erro!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Alterar.this, "Ocorreu um Erro!", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -153,6 +157,9 @@ public class Alterar extends Activity {
     }
 
     public Boolean atualizarChamado(ChamadoDados cd) throws IOException{
+
+        cd.setId(Integer.parseInt(codigo));
+        cd.setStatus("fechado");
         ConvertGson convert = new ConvertGson();
         String url       = "http://10.0.2.2:8080/SistemaChamado/rest/update";
         MethodRequest ma = new MethodRequest();
@@ -164,4 +171,6 @@ public class Alterar extends Activity {
 
         return false;
     }
+
+
 }

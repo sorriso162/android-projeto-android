@@ -20,8 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".InsereChamadoActivity" />
-        <activity android:name=".Alterar" />
         <activity android:name=".Inicial" />
+        <activity android:name=".Alterar" />
         <activity android:name=".ConsultaChamadoActivity"></activity>
     </application>
 
