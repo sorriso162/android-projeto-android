@@ -10,13 +10,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-public class Inicial extends AppCompatActivity {
+import com.projeto.sqlite.Model.LoginDados;
+import com.projeto.sqlite.Model.ManipulaId;
 
+public class Inicial extends AppCompatActivity {
+    String codigo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicial);
+
 
         // Shared Preference
         SharedPreferences preference =
@@ -29,11 +33,14 @@ public class Inicial extends AppCompatActivity {
 
         // Recupera valor do Shared Preference
         int userId = preference.getInt("user_id", 0);
-        Log.i("sfsdf:", String.valueOf(userId));
+        ManipulaId ld = new ManipulaId();
+        Log.i("sfsdf:", String.valueOf(ld.getId()));
+
     }
 
     public void InsertDelete(View view){
         Intent it = new Intent(Inicial.this, InsereChamadoActivity.class);
+       // it.putExtra("codigo", it.getString("codigo"));
         startActivity(it);
     }
 

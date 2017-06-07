@@ -5,7 +5,7 @@ package com.projeto.sqlite.Model;
  */
 
 public class LoginDados {
-
+    private int id ;
     private String senha;
     private String cpf;
 
@@ -26,10 +26,19 @@ public class LoginDados {
         this.cpf = cpf;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "LoginDados{" +
-                "senha='" + senha + '\'' +
+                "id=" + id +
+                ", senha='" + senha + '\'' +
                 ", cpf='" + cpf + '\'' +
                 '}';
     }

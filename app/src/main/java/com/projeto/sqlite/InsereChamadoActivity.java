@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.projeto.sqlite.Model.ChamadoDados;
+import com.projeto.sqlite.Model.ManipulaId;
 import com.projeto.sqlite.Network.ConvertGson;
 import com.projeto.sqlite.Network.CheckInternet;
 import com.projeto.sqlite.Network.MethodRequest;
@@ -17,7 +18,7 @@ import com.projeto.sqlite.Network.MethodRequest;
 import java.io.IOException;
 
 public class InsereChamadoActivity extends AppCompatActivity {
-
+String codigo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,9 @@ public class InsereChamadoActivity extends AppCompatActivity {
                 R.array.type_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        ManipulaId ld = new ManipulaId();
+        Log.i("activit id do usuario",""+ld.getId());
+
     }
 
     public void insere(View view) {
@@ -43,9 +47,10 @@ public class InsereChamadoActivity extends AppCompatActivity {
                     // Obtendo valor do Spinner
                     Spinner dropdown = (Spinner)findViewById(R.id.spinner_type);
                     String text = dropdown.getSelectedItem().toString();
-
                     ChamadoDados cd = new ChamadoDados();
-                    cd.setIdUsuario("1");
+                    ManipulaId ld = new ManipulaId();
+
+                    cd.setIdUsuario(""+ld.getId());
                     cd.setTipo(text);
                     cd.setDescricao(message);
 

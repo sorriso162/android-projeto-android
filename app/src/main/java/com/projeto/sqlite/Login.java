@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.projeto.sqlite.Model.ChamadoDados;
 import com.projeto.sqlite.Model.LoginDados;
+import com.projeto.sqlite.Model.ManipulaId;
 import com.projeto.sqlite.Network.CheckInternet;
 import com.projeto.sqlite.Network.ConvertGson;
 import com.projeto.sqlite.Network.MethodRequest;
@@ -53,7 +55,9 @@ public class Login extends Activity  {
                     try {
                         // se existir ele acessa o sistema
                         if(loginUser(ld)) {
+
                             Intent it = new Intent(Login.this, Inicial.class);
+
                             startActivity(it);
                         }else{
                             Login.this.runOnUiThread(new Runnable() {
@@ -84,6 +88,9 @@ public class Login extends Activity  {
         String url          = "http://10.0.2.2:8080/SistemaChamado/rest/user";
         String resultado = ma.post(url, convert.converteParaJson(ld));
         ld = (LoginDados) convert.paraObjeto(resultado, LoginDados.class);
+        ManipulaId mi = new ManipulaId();
+        mi.setId(ld.getId());
+        Log.i("o id e =",""+mi);
 
         if(ld != null){
             return true;

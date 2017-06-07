@@ -103,8 +103,8 @@ public class Alterar extends Activity {
                     tipo.setText(cd.getTipo());
                     data_inicio.setText(cd.getDataInicio());
                     data_fim.setText(dataFim);
-                    descricao.setText(cd.getDescricao());
-                    status.setText(cd.getStatus());
+                 //   descricao.setText(cd.getDescricao());
+                   // status.setText(cd.getStatus());
                     nome_usuario.setText(cd.getUsuario());
                     nome_solucionador.setText(solucionador);
 
